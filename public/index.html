@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cloudflare Tunnel File Downloader</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <header class="dashboard-header">
+        <div class="logo">
+          <i class="fas fa-cloud-download-alt"></i>
+          <h1>Cloudflare Tunnel File Downloader</h1>
+        </div>
+        <div class="header-actions">
+          <button id="settingsBtn"><i class="fas fa-cog"></i> Settings</button>
+        </div>
+      </header>
+
+      <main class="dashboard-content">
+        <div class="control-panel">
+          <div class="url-input-section">
+            <div class="input-group">
+              <label for="cloudflareUrls"
+                ><i class="fas fa-link"></i> Cloudflare URLs</label
+              >
+              <textarea
+                id="cloudflareUrls"
+                placeholder="Enter one Cloudflare URL per line"
+                rows="3"
+                style="resize:vertical"
+              ></textarea>
+            </div>
+            <button id="fetchFilesBtn" class="btn-primary">
+              <i class="fas fa-search"></i> Connect
+            </button>
+          </div>
+        </div>
+        <div class="file-list-container">
+          <div class="file-list-header">
+            <h2><i class="fas fa-file-alt"></i> File List</h2>
+            <div class="file-actions">
+              <button id="downloadAllBtn" class="btn-secondary" disabled>
+                <i class="fas fa-download"></i> Download All
+              </button>
+              <button id="refreshBtn" class="btn-secondary">
+                <i class="fas fa-sync-alt"></i> Refresh
+              </button>
+            </div>
+          </div>
+
+          <div class="file-list-table">
+            <table>
+              <thead>
+                <tr>
+                  <th width="40px">
+                    <input type="checkbox" id="selectAllCheckbox" />
+                  </th>
+                  <th>Filename</th>
+                  <th width="120px">Size</th>
+                  <th width="150px">Status</th>
+                </tr>
+              </thead>
+              <tbody id="fileListBody">
+                <tr class="empty-state">
+                  <td colspan="4">
+                    <i class="fas fa-folder-open"></i>
+                    <p>
+                      No files found. Please enter at least one valid Cloudflare URL.
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="download-progress-section">
+            <h3><i class="fas fa-tasks"></i> Download Progress</h3>
+            <div class="progress-container">
+              <div class="progress-info">
+                <span id="progressStatus">Ready</span>
+                <span id="progressStats">0/0 files</span>
+              </div>
+              <div class="progress-bar">
+                <div id="globalProgress" class="progress-fill"></div>
+              </div>
+              <div class="speed-info">
+                <span id="downloadSpeed"
+                  ><i class="fas fa-tachometer-alt"></i> 0 MB/s</span
+                >
+                <span id="timeRemaining"><i class="fas fa-clock"></i> --</span>
+              </div>
+            </div>
+
+            <div class="individual-progress-container">
+              <div class="individual-progress" id="individualProgress">
+                <!-- Individual file progress bars will be added here -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="dashboard-footer">
+        <p>Cloudflare Tunnel File Downloader</p>
+      </footer>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal" id="settingsModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3><i class="fas fa-cog"></i> Settings</h3>
+          <button class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="setting-group">
+            <h4>File Handling</h4>
+            <label>
+              Maximum file size (MB):
+              <input type="number" id="maxFileSize" value="500" min="1" />
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-secondary close-modal">Cancel</button>
+          <button class="btn-primary" id="saveSettingsBtn">Save Settings</button>
+        </div>           
+    </div>
+    <script src="/js/main.js"></script>
+  </body>
+</html>
